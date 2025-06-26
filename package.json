@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon lieurjs",
+      "dev": "nodemon --exec node lieurjs",
     "lieurjs": "node lieurjs"
   },
   "dependencies": {

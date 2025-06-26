@@ -1,17 +1,21 @@
 #!/usr/bin/env node
+
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
-import { exec } from 'child_process';
 import chokidar from 'chokidar';
 import http from 'http';
 import { fileURLToPath, pathToFileURL } from 'url';
+import { exec } from 'child_process';
 import './core/LiveReload.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const args = process.argv.slice(2);
 
+// -----------------------------
+// ✅ CLI Generator
+// -----------------------------
 const templates = {
   controller: name => `export default class ${name} {
   index(req, res) {
@@ -42,6 +46,9 @@ if (args[0] === 'make:model') {
   process.exit();
 }
 
+// -----------------------------
+// ✅ Router Function
+// -----------------------------
 const router = async (req, res) => {
   if (req.url === '/') {
     const Home = await import('./controllers/HomeController.js');
@@ -58,19 +65,33 @@ const router = async (req, res) => {
     res.writeHead(404); return res.end();
   }
 
-  res.writeHead(404); res.end('404 Not Found');
+  res.writeHead(404);
+  res.end('404 Not Found');
 };
 
+// -----------------------------
+// ✅ Server Init & Browser Open
+// -----------------------------
+let browserOpened = false;
+
 const server = http.createServer((req, res) => router(req, res));
+
 server.listen(3000, () => {
   const url = 'http://localhost:3000';
   console.log(`✅ Server berjalan di ${url}`);
-  const p = os.platform();
-  if (p === 'win32') exec(`start ${url}`);
-  else if (p === 'darwin') exec(`open ${url}`);
-  else exec(`xdg-open ${url}`);
+
+  if (!browserOpened && args.includes('--open')) {
+    const platform = os.platform();
+    if (platform === 'win32') exec(`start ${url}`);
+    else if (platform === 'darwin') exec(`open ${url}`);
+    else exec(`xdg-open ${url}`);
+    browserOpened = true;
+  }
 });
 
+// -----------------------------
+// 🔁 Auto Reload with chokidar
+// -----------------------------
 chokidar.watch(['controllers/', 'models/', 'views/'], {
   ignored: /node_modules/
 }).on('change', file => {
