@@ -1,0 +1,16 @@
+{
+  "name": "lieurjs",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon lieurjs",
+    "lieurjs": "node lieurjs"
+  },
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
