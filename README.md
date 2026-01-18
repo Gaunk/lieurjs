@@ -99,9 +99,6 @@ lieurjs/
 ├── LICENSE
 └── README.md
 
-yaml
-Copy code
-
 ---
 
 ## 🛠️ Instalasi
@@ -109,7 +106,7 @@ Copy code
 ### 1️⃣ Clone Repository
 
 
-git clone https://github.com/your-username/lieurjs.git
+git clone https://github.com/Gaunk/lieurjs.git
 cd lieurjs
 2️⃣ Install Dependency
 bash
@@ -118,8 +115,8 @@ npm install
 ⚙️ Konfigurasi Environment
 Buat file .env di root project:
 
+=============================================
 env
-Copy code
 APP_PORT=3000
 
 DB_CLIENT=mysql2
@@ -128,33 +125,31 @@ DB_PORT=3306
 DB_USER=root
 DB_PASS=
 DB_NAME=lieur
+
+=============================================
+
 ▶️ Menjalankan Aplikasi
 Mode Development
-bash
-Copy code
 npm run dev
 Mode Production
-bash
-Copy code
 npm start
+=============================================
+
 Akses browser:
-
-
-Copy code
+=============================================
 http://localhost:3000/
 🧩 Sistem Module
 Setiap fitur aplikasi adalah module terpisah.
 
 Contoh module Home:
-
-
-Copy code
+=============================================
 src/modules/home/
 ├── home.controller.js   # Logic halaman
 ├── home.router.js       # Routing
 └── home.service.js      # Business logic
-Module dapat berupa:
 
+Module dapat berupa:
+=============================================
 Public page
 
 Admin page
@@ -165,13 +160,12 @@ CMS
 
 Auth system
 
+=============================================
 🖼️ Templating Engine
 LieurJS menggunakan Nunjucks sebagai template engine.
 
 Contoh render:
 
-js
-Copy code
 import { render } from '../../core/template.js';
 
 render(res, 'home.html', {
@@ -190,7 +184,6 @@ MSSQL	⚠️ Opsional
 
 Ganti Database Tanpa Ubah Kode
 env
-Copy code
 DB_CLIENT=pg
 DB_PORT=5432
 🔗 Objection.js ORM
@@ -223,10 +216,10 @@ enableModule('/', homeRouter, [cors]);
 Struktur testing sudah tersedia:
 
 bash
-Copy code
+
 npm test
 🚧 Roadmap
- CLI Generator (make-page, make-module)
+ CLI Generator (make-module)
 
  AdminLTE integration
 
