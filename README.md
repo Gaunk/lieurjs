@@ -219,7 +219,7 @@ bash
 
 npm test
 🚧 Roadmap
- CLI Generator (make-module)
+ CLI Generator (node scripts/make-module.js Home dst)
 
  AdminLTE integration
 
