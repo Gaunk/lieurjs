@@ -1,7 +1,7 @@
 # 🚀 LieurJS Framework
 
 LieurJS adalah **framework JavaScript berbasis Node.js murni** (tanpa Express, Fastify, atau framework pihak ketiga lain)
-yang dibangun dari nol dengan tujuan edukasi, eksperimen arsitektur, dan fondasi aplikasi web modular.
+yang dibangun dari nol oleh LieurCoding dengan tujuan edukasi, eksperimen arsitektur, dan fondasi aplikasi web modular.
 
 Framework ini mengadopsi pendekatan **modular seperti Laravel**, namun tetap ringan, transparan,
 dan mudah dipahami untuk pengembang JavaScript.
@@ -108,7 +108,7 @@ Copy code
 
 ### 1️⃣ Clone Repository
 
-```bash
+
 git clone https://github.com/your-username/lieurjs.git
 cd lieurjs
 2️⃣ Install Dependency
@@ -139,7 +139,7 @@ Copy code
 npm start
 Akses browser:
 
-arduino
+
 Copy code
 http://localhost:3000/
 🧩 Sistem Module
@@ -147,7 +147,7 @@ Setiap fitur aplikasi adalah module terpisah.
 
 Contoh module Home:
 
-arduino
+
 Copy code
 src/modules/home/
 ├── home.controller.js   # Logic halaman
