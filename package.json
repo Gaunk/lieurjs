@@ -1,6 +1,6 @@
 {
-  "name": "lieurframework",
-  "version": "1.0.0",
+  "name": "lieurjs",
+  "version": "1.1.1",
   "description": "Mini Node.js framework murni tanpa Express, modular, hot-reload config dan multiple database support",
   "main": "server.js",
   "type": "module",
@@ -18,7 +18,7 @@
     "modular",
     "hot-reload"
   ],
-  "author": "Your Name",
+  "author": "LieurCoding",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.1.4",
