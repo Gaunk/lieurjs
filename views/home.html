@@ -1,7 +1,228 @@
-<html>
-<head><title>{{ title }}</title></head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }}</title>
+
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --dark: #0f172a;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --code-bg: #020617;
+      --code-text: #e5e7eb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #eef2ff, #f8fafc);
+      color: var(--dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 1.5rem 2rem;
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+
+    main {
+      flex: 1;
+      padding: 3rem 1.5rem;
+      max-width: 1100px;
+      margin: auto;
+      width: 100%;
+    }
+
+    .hero {
+      background: white;
+      padding: 3rem;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.4rem 0.9rem;
+      background: #eef2ff;
+      color: var(--primary);
+      border-radius: 999px;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 720px;
+      margin: auto;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--dark);
+    }
+
+    .section p {
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 1.5rem;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .doc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.2rem;
+      border-radius: 10px;
+      background: #eef2ff;
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .doc-link:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.4rem 1rem;
+      font-size: 0.85rem;
+      color: var(--gray);
+      border-top: 1px solid #e5e7eb;
+      background: white;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
 <body>
-<h1>{{ title }}</h1>
-<p>{{ content }}</p>
+
+  <header>
+    <h1>LieurJS</h1>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <span class="badge">Pure Node.js Framework</span>
+      <h2>{{ title }}</h2>
+      <p>{{ content }}</p>
+    </section>
+
+    <!-- CONTROLLER SOURCE -->
+    <section class="section">
+      <h3>📄 src/modules/home/home.controller.js</h3>
+      <p>Controller bertanggung jawab menangani request dan merender view.</p>
+
+      <pre><code>
+		import { render } from '../../core/template.js';
+
+		export function index(req, res) {
+		  render(res, 'home.html', {
+		    title: 'Welcome to LieurJS',
+		    content: 'LieurJS adalah framework Node.js modular tanpa Express.',
+		    year: new Date().getFullYear()
+		  });
+		}
+      </code></pre>
+    </section>
+
+    <!-- VIEW SOURCE -->
+    <section class="section">
+      <h3>🎨 views/home.html</h3>
+      <p>Template HTML menggunakan Nunjucks untuk rendering dinamis.</p>
+
+      <pre><code>
+&lt;h2&gt;{{ title }}&lt;/h2&gt;
+&lt;p&gt;{{ content }}&lt;/p&gt;
+      </code></pre>
+    </section>
+
+    <!-- NUNJUCKS DOCUMENTATION -->
+    <section class="section">
+      <h3>📘 Nunjucks Documentation</h3>
+      <p>
+        LieurJS menggunakan <strong>Nunjucks</strong> sebagai templating engine resmi
+        untuk rendering HTML yang modular dan powerful.
+      </p>
+
+      <a
+        class="doc-link"
+        href="https://mozilla.github.io/nunjucks/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        🔗 Buka Dokumentasi Resmi Nunjucks
+      </a>
+    </section>
+
+  </main>
+
+  <footer>
+    © {{ year | default(2021) }} LieurJS Framework — Built with Pure Node.js  
+    <br />
+    ❤️ Terima kasih kepada
+    <a
+      href="https://mozilla.github.io/nunjucks/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Nunjucks (Mozilla)
+    </a>
+    atas templating engine yang luar biasa
+  </footer>
+
 </body>
 </html>

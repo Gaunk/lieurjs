@@ -18,7 +18,8 @@ async function welcomeRoute(req, res) {
 const routes = {
     '/': { handler: welcomeRoute, middlewares: [cors] },
     '/users': { handler: userRouter, middlewares: [cors, rateLimiter, auth] },
-    '/products': { handler: productRouter, middlewares: [cors, rateLimiter] }
+    '/products': { handler: productRouter, middlewares: [cors, rateLimiter] },
+    
 };
 
 export async function appRouter(req, res) {

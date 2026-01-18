@@ -1,4 +1,5 @@
 import { render } from '../../core/template.js';
+import { HomeService } from './home.service.js';
 
 export const HomeController = {
     async index(req, res) {
