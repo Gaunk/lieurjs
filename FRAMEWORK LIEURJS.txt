@@ -1,0 +1,58 @@
+lieurframework/
+│
+├── src/
+│   ├── config/               # File konfigurasi
+│   │   ├── app.config.js
+│   │   ├── db.config.js
+│   │   └── env.js
+│   │
+│   ├── core/                 # Inti framework (engine)
+│   │   ├── app.js            # Class App untuk bootstrap
+│   │   ├── server.js         # HTTP server
+│   │   ├── router.js         # Router engine
+│   │   ├── middleware.js     # Middleware engine
+│   │   └── errorHandler.js   # Global error handler
+│   │
+│   ├── modules/              # Modules/fitur aplikasi (mirip microservices)
+│   │   ├── user/
+│   │   │   ├── user.controller.js
+│   │   │   ├── user.service.js
+│   │   │   ├── user.model.js
+│   │   │   ├── user.router.js
+│   │   │   └── user.validator.js
+│   │   └── product/
+│   │       ├── product.controller.js
+│   │       ├── product.service.js
+│   │       ├── product.model.js
+│   │       ├── product.router.js
+│   │       └── product.validator.js
+│   │
+│   ├── database/             # Layer database
+│   │   ├── index.js          # Koneksi DB
+│   │   ├── migrations/       # File migrasi DB
+│   │   └── seeders/          # File seed data
+│   │
+│   ├── utils/                # Helper functions
+│   │   ├── logger.js
+│   │   ├── response.js
+│   │   └── validator.js
+│   │
+│   ├── middlewares/          # Middleware khusus
+│   │   ├── auth.js
+│   │   ├── cors.js
+│   │   └── rateLimiter.js
+│   │
+│   └── routes.js             # Penggabungan semua router modules
+│
+├── tests/                    # Unit & integration tests
+│   ├── unit/
+│   └── integration/
+│
+├── scripts/                  # Script tambahan
+│   ├── migrate.js
+│   └── seed.js
+│
+├── .env                      # Environment variables
+├── package.json
+├── README.md
+└── server.js                 # Entry point aplikasi

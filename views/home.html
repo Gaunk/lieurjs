@@ -4,50 +4,169 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="generator" content="LieurJS 1.1.1">
-
   <title>{{ title }}</title>
 
+  <!-- Meta SEO -->
+  <meta name="description" content="Dokumentasi resmi LieurJS, framework Node.js modular tanpa Express.">
+  <link rel="canonical" href="https://lieurjs.dev/docs">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="LieurJS Documentation">
+  <meta property="og:description" content="Dokumentasi resmi LieurJS, framework Node.js modular tanpa Express.">
+  <meta property="og:type" content="website">
+
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-..." crossorigin="anonymous">
-  <link rel="icon" type="image/png" href="/favicon.png">
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+  <!-- Bootstrap Icons CDN (letakkan di head) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="icon" type="image/png" href="/favicon.ico">
 
   <style>
     :root {
-      --primary: #4f46e5;
-      --dark: #0f172a;
-      --light: #f8fafc;
+      --lieur-color: #0cbdf7;
+      --js-color: #ffde59;
       --gray: #64748b;
       --code-bg: #020617;
       --code-text: #e5e7eb;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background: linear-gradient(135deg, #eef2ff, #f8fafc);
+      background: #f8fafc;
       min-height: 100vh;
+      padding-top: 64px; /* navbar offset */
       display: flex;
       flex-direction: column;
     }
 
-    header {
-      padding: 1.5rem 2rem;
-      background: white;
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1030;
+      height: 64px;
+      background: #fff;
       border-bottom: 1px solid #e5e7eb;
     }
 
-    header h1 {
-      color: var(--primary);
-      margin: 0;
+    .navbar-brand {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
+    .navbar-brand .lieur {
+      color: var(--lieur-color);
+    }
+    .navbar-brand .js {
+      color: var(--js-color);
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      height: calc(100vh - 64px);
+      width: 240px;
+      background: #fff;
+      overflow-y: auto;
+      border-right: 1px solid #e5e7eb;
+      padding: 1rem 0.75rem;
+    }
+
+    .sidebar .nav-link {
+      color: #334155;
+      font-weight: 500;
+      border-radius: 6px;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .sidebar .nav-link.active,
+    .sidebar .nav-link:hover {
+      background-color: #eef2ff;
+      color: var(--lieur-color);
+    }
+
+    .sidebar .nav-link.active {
+      font-weight: 600;
+      border-left: 3px solid var(--lieur-color);
+      padding-left: 0.6rem;
+    }
+
+    /* CONTENT */
+    main {
+      margin-left: 240px;
+      padding: 2rem;
+      flex-grow: 1;
+    }
+
+    @media (max-width: 991px) {
+      .sidebar { position: static; width: 100%; height: auto; border-right: none; }
+      main { margin-left: 0; }
+    }
+
+    /* HERO */
     .hero {
-      background: white;
+      background: #fff;
       padding: 3rem;
       border-radius: 1rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
       text-align: center;
       margin-bottom: 3rem;
     }
 
+    .hero h1.hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1.hero-title .lieur { color: var(--lieur-color); }
+    .hero h1.hero-title .js { color: var(--js-color); }
+
+    .hero p { color: var(--gray); font-size: 1.1rem; }
+
+    /* BUTTONS CUSTOM */
+    .btn-lieur {
+      color: var(--lieur-color);
+      border-color: var(--lieur-color);
+      font-weight: 600;
+    }
+    .btn-lieur:hover { background-color: var(--lieur-color); color: #fff; }
+
+    .btn-js {
+      color: var(--js-color);
+      border-color: var(--js-color);
+      font-weight: 600;
+    }
+    .btn-js:hover { background-color: var(--js-color); color: #000; }
+
+    .btn-github {
+      background-color: #24292e; /* warna GitHub */
+      color: white;
+      padding: 0.35rem 0.75rem;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-github:hover {
+      background-color: #3c4043; /* hover sedikit terang */
+      transform: translateY(-2px);
+    }
+
+    /* CODE BLOCK */
     pre {
       background: var(--code-bg);
       color: var(--code-text);
@@ -56,109 +175,304 @@
       overflow-x: auto;
       font-size: 0.9rem;
       line-height: 1.6;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+    }
+      .btn-download {
+      background-color: #0cbdf7; /* kuning hangat */
+      color: #212529; /* teks gelap agar kontras */
+      padding: 0.45rem 0.9rem;
+      border-radius: 5px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
+    .btn-download:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* efek lembut */
+    }
+
+    /* FOOTER */
     footer {
       text-align: center;
-      padding: 1.4rem 1rem;
+      padding: 1.5rem;
       font-size: 0.85rem;
       color: var(--gray);
       border-top: 1px solid #e5e7eb;
-      background: white;
+      background: #fff;
       margin-top: auto;
-    }
-
-    footer a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .doc-links a {
-      margin-right: 0.5rem;
-      margin-top: 0.5rem;
     }
   </style>
 </head>
-<body>
 
-  <header class="mb-4">
-    <h1 class="fs-2"></h1>
-  </header>
+<body data-bs-spy="scroll" data-bs-target="#sidebarMenu" data-bs-offset="80" tabindex="0">
 
-  <main class="container flex-grow-1">
-
-    <!-- HERO -->
-    <section class="hero mb-5">
-      <!-- Dokumentasi dengan Logo -->
-      <div class="doc-links mt-3 text-center">
-        <!-- Logo -->
-        <div class="d-flex justify-content-center mb-4">
-          <img src="/logo.png" alt="LieurJS Logo" class="img-fluid" style="max-width:150px;">
-        </div>      
-
-        <!-- Tombol Dokumentasi -->
-        <a href="https://mozilla.github.io/nunjucks/" target="_blank" class="btn btn-outline-primary me-2">
-          📘 Nunjucks Docs
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light px-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="/logo-nav.png" width="140">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+      <!-- Navbar -->
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="btn btn-github d-flex align-items-center" href="https://github.com/Gaunk/lieurjs" target="_blank">
+          <i class="bi bi-github me-2"></i> GitHub
         </a>
-        <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank" class="btn btn-outline-success">
-          🎨 Bootstrap Docs
-        </a>
-      </div>
-    </section>
+      </li>
+    </ul>
+    </div>
+  </div>
+</nav>
 
-    <!-- CONTROLLER SOURCE -->
-    <section class="mb-5">
-      <h3>📄 src/modules/home/home.controller.js</h3>
-      <p>Controller bertanggung jawab menangani request dan merender view.</p>
-      <pre><code>
-import { render } from '../../core/template.js';
+<!-- SIDEBAR -->
+<aside id="sidebarMenu" class="sidebar">
+  <nav aria-label="Documentation navigation">
+    <ul class="nav flex-column">
+      <li class="nav-item"><a class="nav-link active" href="#intro">Introduction</a></li>
+      <li class="nav-item"><a class="nav-link" href="#installation">Installation</a></li>
+      <li class="nav-item"><a class="nav-link" href="#controller">Controller</a></li>
+      <li class="nav-item"><a class="nav-link" href="#view">View</a></li>
+      <li class="nav-item"><a class="nav-link" href="#routing">Routing</a></li>
+      <li class="nav-item"><a class="nav-link" href="#template">Template Engine</a></li>
+    </ul>
+  </nav>
+</aside>
 
-export function index(req, res) {
-  render(res, 'home.html', {
-    title: 'Welcome to LieurJS',
-    content: 'LieurJS adalah framework Node.js modular tanpa Express.',
-    year: new Date().getFullYear()
-  });
-}
-      </code></pre>
-    </section>
+<!-- MAIN CONTENT -->
+<main>
+  <!-- HERO -->
+  <section id="intro" class="hero">
+  <img src="/logo-1.png" style="max-width:140px" class="mb-4">
+  <h1 class="fw-bold hero-title"><span class="lieur">Lieur</span><span class="js">JS</span></h1>
+  <p class="mt-2 text-muted">LieurJS adalah framework Node.js modular tanpa Express.</p>
+    <div class="mt-4">
+      <a href="/download/lieurjs.zip" class="btn btn-download me-2">
+      <i class="bi bi-download me-1"></i> Download
+    </a>
+    <a href="https://mozilla.github.io/nunjucks/" target="_blank" class="btn btn-lieur me-2">
+      <i class="bi bi-book me-1"></i> Nunjucks Docs
+    </a>
+  </div>
+</section>
 
-    <!-- VIEW SOURCE -->
-    <section class="mb-5">
-      <h3>🎨 views/home.html</h3>
-      <p>Template HTML menggunakan Nunjucks untuk rendering dinamis.</p>
-      <pre><code>
+  <!-- INTRODUCTION -->
+  <section id="introduction" class="mb-5">
+    <h2>Introduction</h2>
+    <p>LieurJS adalah framework JavaScript berbasis Node.js murni, dibuat untuk edukasi, eksperimen arsitektur, dan fondasi aplikasi web modular.</p>
+    <p>Framework ini mengadopsi pendekatan modular seperti Laravel, tapi tetap ringan dan mudah dipahami.</p>
+
+    <h3>Tujuan LieurJS</h3>
+    <ul>
+      <li>Membuat framework Node.js</li>
+      <li>Memahami cara kerja HTTP server, router, middleware internal</li>
+      <li>Menyediakan struktur aplikasi rapi & scalable</li>
+      <li>Mendukung aplikasi berbasis halaman (HTML) dan API</li>
+      <li>Mendukung multi-database dengan ORM</li>
+    </ul>
+
+    <h3>Fitur Utama</h3>
+    <ul>
+      <li>Pure Node.js (tanpa Express/Fastify)</li>
+      <li>Modular architecture (modules-based)</li>
+      <li>Custom router engine & middleware system</li>
+      <li>Page modules, REST API, CMS, Auth system</li>
+      <li>Templating engine (Nunjucks)</li>
+      <li>Static file serving (/public)</li>
+      <li>ORM-ready (Objection.js + Knex)</li>
+      <li>Multi-database support</li>
+      <li>Environment-based config</li>
+      <li>Hot reload (Nodemon)</li>
+      <li>CLI-ready (roadmap)</li>
+    </ul>
+  </section>
+
+  <!-- INSTALLATION -->
+  <section id="installation" class="mb-5">
+    <h2>Installation</h2>
+    <p>Ikuti langkah-langkah berikut untuk mengunduh dan menjalankan LieurJS di lokal:</p>
+
+    <h3>1. Clone repository dari GitHub</h3>
+    <pre><code>git clone https://github.com/Gaunk/lieurjs.git
+  cd lieurjs</code></pre>
+
+    <h3>2. Install dependencies</h3>
+    <pre><code>npm install</code></pre>
+    <p>Perintah ini akan mengunduh semua <code>node_modules</code> yang dibutuhkan oleh LieurJS.</p>
+
+    <h3>3. Jalankan server development</h3>
+    <pre><code>npm start</code></pre>
+    <p>Secara default, server akan berjalan di <code>http://localhost:3000</code>.</p>
+
+    <h3>4. (Opsional) Jalankan dengan hot reload</h3>
+    <pre><code>npx nodemon src/core/app.js</code></pre>
+    <p>Dengan <code>nodemon</code>, setiap perubahan kode akan otomatis memuat ulang server.</p>
+  </section>
+
+
+  <!-- CONTROLLER -->
+  <section id="controller" class="mb-5">
+    <h2>Controller</h2>
+    <h3>src/modules/home/home.controller.js</h3>
+    <pre><code>
+    import { render } from '../../core/template.js';
+
+    export function index(req, res) {
+      render(res, 'home.html', {
+        title: 'Welcome to LieurJS',
+        content: 'LieurJS adalah framework Node.js modular tanpa Express.',
+        year: new Date().getFullYear()
+      });
+    }
+    </code></pre>
+  </section>
+
+  <!-- VIEW -->
+  <section id="view" class="mb-5">
+    <h2>View</h2>
+    <h3>views/home.html</h3>
+    <pre><code>
 &lt;h2&gt;{{ title }}&lt;/h2&gt;
 &lt;p&gt;{{ content }}&lt;/p&gt;
-      </code></pre>
-    </section>
+    </code></pre>
+  </section>
 
-  </main>
+  <!-- ROUTING -->
+  <section id="routing" class="mb-5">
+    <h2>Routing</h2>
+    <p>Setiap module memiliki router sendiri, misal:</p>
+    <pre><code>
+src/modules/home/home.router.js
+src/modules/product/product.router.js
+    </code></pre>
+    <p>Semua router module digabung di <code>src/routes.js</code> sebagai router utama:</p>
+    <pre><code>
+import homeRouter from './modules/home/home.router.js';
+import productRouter from './modules/product/product.router.js';
 
-  <footer>
-    © {{ year | default(2021) }} LieurJS — Built with Pure Node.js  
-    <br />
-    ❤️ Terima kasih kepada
-    <a
-      href="https://mozilla.github.io/nunjucks/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Nunjucks (Mozilla)
-    </a>
-    dan
-    <a
-      href="https://getbootstrap.com/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Bootstrap
-    </a>
-  </footer>
+const router = new Router();
+router.use('/home', homeRouter);
+router.use('/products', productRouter);
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
+export default router;
+    </code></pre>
+    <p>Router utama ini lalu digunakan di <code>src/core/app.js</code> untuk bootstrap server.</p>
+  </section>
+
+  <!-- TEMPLATE ENGINE -->
+  <section id="template" class="mb-5">
+    <h2>Template Engine</h2>
+    <p>LieurJS menggunakan Nunjucks sebagai template engine untuk merender halaman HTML.</p>
+    <pre><code>
+import { render } from '../../core/template.js';
+
+render(res, 'home.html', {
+  title: 'LieurJS Framework',
+  content: 'Welcome to LieurJS'
+});
+    </code></pre>
+  </section>
+
+  <!-- DATABASE -->
+  <section id="database" class="mb-5">
+    <h2>Database & ORM</h2>
+    <p>LieurJS mendukung multi-database melalui Knex + Objection.js.</p>
+    <table class="table">
+      <tr>
+        <th>Database</th>
+        <th>Status</th>
+      </tr>
+      <tr><td>MySQL</td><td>✅</td></tr>
+      <tr><td>PostgreSQL</td><td>✅</td></tr>
+      <tr><td>SQLite</td><td>⚠️ Opsional</td></tr>
+      <tr><td>MSSQL</td><td>⚠️ Opsional</td></tr>
+    </table>
+
+    <h3>Contoh Model Objection.js</h3>
+    <pre><code>
+import { BaseModel } from '../../core/base.model.js';
+
+export class User extends BaseModel {
+  static tableName = 'users';
+}
+    </code></pre>
+  </section>
+
+  <!-- MIDDLEWARE -->
+  <section id="middleware" class="mb-5">
+    <h2>Middleware</h2>
+    <p>Middleware bawaan:</p>
+    <ul>
+      <li>cors</li>
+      <li>auth</li>
+      <li>rateLimiter</li>
+      <li>serveStatic</li>
+    </ul>
+    <p>Contoh penggunaan:</p>
+    <pre><code>
+enableModule('/', homeRouter, [cors]);
+    </code></pre>
+  </section>
+
+  <!-- TESTING -->
+  <section id="testing" class="mb-5">
+    <h2>Testing</h2>
+    <p>Struktur testing sudah tersedia:</p>
+    <pre><code>npm test</code></pre>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap" class="mb-5">
+    <h2>Roadmap</h2>
+    <ul>
+      <li>CLI Generator (node scripts/make-module.js)</li>
+      <li>AdminLTE integration</li>
+      <li>Authentication & Authorization</li>
+      <li>REST API mode</li>
+      <li>Config caching</li>
+      <li>Documentation website</li>
+      <li>Plugin system</li>
+    </ul>
+  </section>
+
+  <!-- CONTRIBUTING -->
+  <section id="contributing" class="mb-5">
+    <h2>Contributing</h2>
+    <p>Kontribusi sangat terbuka.</p>
+    <ol>
+      <li>Fork repository</li>
+      <li>Buat branch fitur</li>
+      <li>Commit perubahan</li>
+      <li>Pull request</li>
+    </ol>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  © {{ year | default(2021) }} LieurJS — Built with Pure Node.js
+</footer>
+
+<!-- JSON-LD Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "LieurJS",
+  "url": "https://lieurjs.dev",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://lieurjs.dev/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
